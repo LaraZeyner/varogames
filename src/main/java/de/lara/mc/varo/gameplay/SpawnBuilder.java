@@ -348,8 +348,7 @@ public class SpawnBuilder {
               .add(x, y, z);
           final Block checkBlock = checkLocation.getBlock();
 
-          if (y == -1 && !checkBlock.getType().isSolid() ||
-              y > -1 && !Const.allowedMaterialsAtSpawn.contains(checkBlock.getType())) {
+          if (y > -1 && !Const.allowedMaterialsAtSpawn.contains(checkBlock.getType())) {
             return false;
           }
         }

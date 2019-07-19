@@ -2,6 +2,7 @@ package de.lara.mc.varo.util;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 
 import de.lara.mc.varo.Varo;
 import de.lara.mc.varo.commands.Register;
@@ -22,18 +23,19 @@ import de.lara.mc.varo.storage.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Created by Lara on 28.05.2019 for varo
  */
 public final class Registerer {
+  private static final Logger logger = Logger.getLogger(Register.class.getName());
+
   private static boolean checkErrors() {
     return Data.getInstance().getVaroData().getStartDate() == null;
   }
 
-  public static void performRegistration(Varo varo) {
-    registerCommands(varo);
+  public static void performRegistration() {
+    registerCommands();
     registerEvents();
 
     if (checkErrors()) {
@@ -53,7 +55,7 @@ public final class Registerer {
     }
   }
 
-  private static void registerCommands(JavaPlugin plugin) {
+  private static void registerCommands() {
     // Insert Commands here
     final List<CommandExecutor> commands = Arrays.asList(new Register(), new SetSpawn(), new Start(), new Strike(),
         new Team(), new Unregister());
@@ -61,31 +63,30 @@ public final class Registerer {
     for (final CommandExecutor commandExecutor : commands) {
       final Class<? extends CommandExecutor> commandExecutorClass = commandExecutor.getClass();
       final String commandName = commandExecutorClass.getSimpleName().toLowerCase();
-      plugin.getCommand(commandName).setExecutor(commandExecutor);
+      Varo.getInstance().getCommand(commandName).setExecutor(commandExecutor);
     }
   }
 
-  /*private void registerCommands() {
-    final Reflections reflections = new Reflections("net.mmm.template.commands");
+  /*private static void registerCommands() {
+    final Reflections reflections = new Reflections("main.java.de.lara.mc.varo.commands");
     for (Class<? extends CommandExecutor> commandClass : reflections.getSubTypesOf(CommandExecutor.class)) {
       final String name = commandClass.getSimpleName().toLowerCase();
       try {
-        getCommand(name).setExecutor(commandClass.newInstance());
+        Varo.getInstance().getCommand(name).setExecutor(commandClass.newInstance());
       } catch (ReflectiveOperationException ignored) {
         logger.warning("Command " + name + " could not loaded.");
       }
     }
   }
 
-  private void registerEvents() {
-    final Reflections reflections = new Reflections("net.mmm.template.listener");
+  private static void registerEvents() {
+    final Reflections reflections = new Reflections("de.lara.mc.varo.listener");
     for (Class<? extends Listener> listenerClass : reflections.getSubTypesOf(Listener.class)) {
       try {
-        Bukkit.getPluginManager().registerEvents(listenerClass.newInstance(), this);
+        Bukkit.getPluginManager().registerEvents(listenerClass.newInstance(), Varo.getInstance());
       } catch (ReflectiveOperationException ignored) {
         logger.warning("Event " + listenerClass.getName() + " could not loaded.");
       }
-
     }
   }*/
 }

@@ -32,7 +32,7 @@ public class Varo extends JavaPlugin {
     final Data data = Data.getInstance();
     data.getSql().updateTeams();
     data.getCache().putAll(data.getSql().getPlayers());
-    Registerer.performRegistration(this);
+    Registerer.performRegistration();
 
     logger.log(Level.INFO, Messages.SUCCESSFULLY_STARTED);
   }

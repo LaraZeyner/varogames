@@ -18,7 +18,7 @@ public class SetSpawn implements CommandExecutor {
 
   @Override
   public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-    if (VaroManager.isPrepared() && !VaroManager.isStarted()) {
+    if (!VaroManager.isPrepared() && !VaroManager.isStarted()) {
       if (sender.isOp() && sender instanceof Player) {
         final Player player = (Player) sender;
         final Location spawnLocation = player.getLocation();
