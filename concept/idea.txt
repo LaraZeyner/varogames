@@ -1,0 +1,18 @@
+health regeneration:
+ - weniger Regen beim Sprinten
+ - max Monsterschaden
+
+Reviving?
+
+Enchantments/Items wie:
+ - Live Steal
+ - Base Health regen
+ - True Damage
+ - Critical Strike
+ - usw
+
+varo News
+Strike und Teaminfo
+
+
+Stärkere Rüstung mit der Zeit

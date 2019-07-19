@@ -1,0 +1,13 @@
+name: Varo
+version: 1.8.2
+authors: [MineMagicMania-Entwicklerteam]
+
+main: de.lara.mc.varo.Varo
+commands:
+  register:
+  resetspawn:
+  setspawn:
+  start:
+  strike:
+  team:
+  unregister:
